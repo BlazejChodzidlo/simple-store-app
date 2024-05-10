@@ -1,33 +1,21 @@
-"use client"
-
 import React from 'react'
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink, navigationMenuTriggerStyle } from './navigation-menu'
-import Link from 'next/link'
-import NavProfileButton from './nav-profile-button'
+import NavLinks from './nav-links'
+import { getSession } from '@/lib/session/getSession'
+import { logout } from '@/lib/session/logout'
 
-function Nav() {
+async function Nav() {
+  const session = await getSession()
+
+  async function handleLogout(){
+    "use server"
+
+    await logout()
+  }
+
   return (
-    <div className={`py-2 mx-auto relative w-full border-b shadow`}>
-      <NavigationMenu className="mx-auto">
-          <NavigationMenuList>
-              <NavigationMenuItem>
-                  <Link href="/" legacyBehavior passHref>
-                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        Strona Główna
-                      </NavigationMenuLink>
-                  </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                  <Link href="/produkty" legacyBehavior passHref>
-                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        Produkty
-                      </NavigationMenuLink>
-                  </Link>
-              </NavigationMenuItem>
-          </NavigationMenuList>
-      </NavigationMenu>
-      <NavProfileButton />
-    </div>
+    <>
+      <NavLinks name={session?.name} logout={handleLogout}/>
+    </>
   )
 }
 

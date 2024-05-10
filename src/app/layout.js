@@ -11,12 +11,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="pl" suppressHydrationWarning>
       <body className={inter.className + 'w-full'}>
         <ThemeProvider attribute="class" disableTransitionOnChange>
           <Nav />
-          <div className="mx-auto container" style={{minHeight: 'calc(100vh - 57px)'}}>
+          <div className="mx-auto container min-h-screen">
             {children}
           </div>
         </ThemeProvider>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Produkty() {
   return (
-    <div>Produkty</div>
+    <div className="flex justify-center items-center min-h-screen">Produkty</div>
   )
 }
 

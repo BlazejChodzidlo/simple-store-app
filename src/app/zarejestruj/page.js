@@ -1,20 +1,20 @@
-import LoginForm from '@/components/ui/login-form'
+import SignInForm from '@/components/ui/sign-in-form'
 import { getSession } from '@/lib/session/getSession'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-async function Zaloguj() {
+async function Zarejstruj() {
   const session = await getSession()
 
-  if (session){
+  if(session){
     redirect('/profil')
   }
 
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-screen" >
-      <LoginForm />
+      <SignInForm />
     </div>
   )
 }
 
-export default Zaloguj
+export default Zarejstruj

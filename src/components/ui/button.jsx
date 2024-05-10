@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        profile: "dark:bg-background bg-background outline-none hover:bg-accent hover:text-accent-foreground focus:outline-none dark:hover:bg-accent dark:hover:text-accent-foreground dark:focus:outline-none aria-expanded:bg-accent aria-expaneded:text-accent-foreground dark:aria-expanded:bg-accent dark:aria-expaneded:text-accent-foreground ring-offset-transparent focus-visible:ring-0 focus-visible:ring-offset-0",
+        profile: "flex flex-row justify-center items-center gap-1.5 dark:bg-background bg-background outline-none hover:bg-accent hover:text-accent-foreground focus:outline-none dark:hover:bg-accent dark:hover:text-accent-foreground dark:focus:outline-none aria-expanded:bg-accent aria-expaneded:text-accent-foreground dark:aria-expanded:bg-accent dark:aria-expaneded:text-accent-foreground ring-offset-transparent focus-visible:ring-0 focus-visible:ring-offset-0",
       },
       size: {
         default: "h-10 px-4 py-2",
