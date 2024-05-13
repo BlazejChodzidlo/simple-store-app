@@ -15,6 +15,7 @@ export const POST = async (req, res) => {
             select: {
                 email: true,
                 name: true,
+                admin: true,
                 password: true
             }
         })
@@ -22,7 +23,7 @@ export const POST = async (req, res) => {
         if (res){
             if (bcrypt.compareSync(data.password, res.password)){
                 const expires = new Date(Date.now() + 3600 * 1000)
-                const session = await encrypt({email: data.email, name: res.name, expires})
+                const session = await encrypt({email: data.email, name: res.name, admin: res.admin, expires})
     
                 cookies().set('session', session, {expires, httpOnly: true})
     

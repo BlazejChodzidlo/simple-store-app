@@ -19,7 +19,12 @@ const formSchema = z.object({
     name: z.string().min(1, {message: "Imię jest zbyt krótkie."}),
     surname: z.string().min(1, {message: "Nazwisko jest zbyt krótkie."}),
     password: z.string().min(4, {message: "Hasło jest zbyt krótkie"}).regex(passwordValidation, {message: "Hasło powinno składać się z 8 znaków, w tym duza litera, znak specjalny oraz liczba."}),
+    confirmPassword: z.string().min(4),
     email: z.string().min(4, {message: "Email jest zbyt krótki!"}).email("Nieprawidłowy email.")
+})
+.refine((data) => data.password === data.confirmPassword, {
+    message: 'Podane hasła nie są identyczne!',
+    path: ['confirmPassword']
 })
 
 function SignInForm() {
@@ -32,7 +37,8 @@ function SignInForm() {
             name: "",
             surname: "",
             email: "",
-            password: ""
+            password: "",
+            confirmPassword: ""
         }
     })
 
@@ -92,13 +98,22 @@ function SignInForm() {
                         <FormMessage />
                     </FormItem>
                 )} />
+                <FormField control={form.control} name="confirmPassword" render={({field}) => (
+                    <FormItem>
+                        <FormLabel>Potwiedź hasło:</FormLabel>
+                        <FormControl>
+                            <Input type="password" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )} />
                 <div className='flex flex-col justify-center items-left gap-6'>
                     <span className="text-sm text-red-600 -mt-8">{message}</span>
                     <div className="w-full flex flex-row justify-center">
                         <Button type="submit" disabled={loading}>
                             {
                                 loading ?
-                                <div class="container-dot"><div class="dot" /></div>
+                                <div className="container-dot"><div className="dot" /></div>
                                 :
                                 'Zarejestruj'
                             }

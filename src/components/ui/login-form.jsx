@@ -83,7 +83,7 @@ function LoginForm() {
                         <Button type="submit" disabled={loading}>
                             {
                                 loading ?
-                                <div class="container-dot"><div class="dot" /></div>
+                                <div className="container-dot"><div className="dot" /></div>
                                 :
                                 'Zaloguj'
                             }

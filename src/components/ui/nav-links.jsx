@@ -5,9 +5,9 @@ import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuL
 import Link from 'next/link'
 import NavProfileButton from './nav-profile-button'
 
-function NavLinks({name, logout}) {
+function NavLinks({name, admin, logout}) {
   return (
-    <div className={`py-2 mx-auto fixed w-full border-b shadow z-20`}>
+    <div className={`fixed shadow py-2 top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
       <NavigationMenu className="mx-auto">
           <NavigationMenuList>
               <NavigationMenuItem>
@@ -24,9 +24,16 @@ function NavLinks({name, logout}) {
                       </NavigationMenuLink>
                   </Link>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                  <Link href="/oferty" legacyBehavior passHref>
+                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        Oferty
+                      </NavigationMenuLink>
+                  </Link>
+              </NavigationMenuItem>
           </NavigationMenuList>
       </NavigationMenu>
-      <NavProfileButton name={name} logout={logout}/>
+      <NavProfileButton name={name} logout={logout} admin={admin}/>
     </div>
   )
 }

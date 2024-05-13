@@ -17,7 +17,7 @@ import { CircleUser } from 'lucide-react'
 
   
 
-function NavProfileButton({name, logout}) {
+function NavProfileButton({name, admin, logout}) {
     async function handleLogout() {
         await logout()
       }
@@ -37,13 +37,24 @@ function NavProfileButton({name, logout}) {
                     name ?
                     <>
                         <DropdownMenuItem asChild>
-                            <Link href={'./zaloguj'}>Zarządzaj</Link>
+                            <Link href={'/profil'}>Zarządzaj</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <Link href={'./zarejestruj'}>Zamówienia</Link>
+                            <Link href={'/profil/przesylki'}>Przesylki</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <span className='text-red-600' onClick={handleLogout}>Wyloguj</span>
+                            <Link href={'/profil/zamowienia'}>Zamówienia</Link>
+                        </DropdownMenuItem>
+                        {
+                            admin ? 
+                            <DropdownMenuItem asChild>
+                                <Link href={'/panel'}>Panel Sterowania</Link>
+                            </DropdownMenuItem>
+                            :
+                            ''
+                        }
+                        <DropdownMenuItem asChild>
+                            <span className='text-red-600 hover:bg-destructive hover:text-white' onClick={handleLogout}>Wyloguj</span>
                         </DropdownMenuItem>
                     </>
                     :

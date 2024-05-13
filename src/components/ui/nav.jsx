@@ -14,7 +14,7 @@ async function Nav() {
 
   return (
     <>
-      <NavLinks name={session?.name} logout={handleLogout}/>
+      <NavLinks name={session?.name} logout={handleLogout} admin={session?.admin}/>
     </>
   )
 }
