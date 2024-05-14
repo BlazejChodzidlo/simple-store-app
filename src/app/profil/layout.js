@@ -52,7 +52,7 @@ export default async function ProfilLayout({ children }) {
   return (
     <div className="w-full min-h-screen pt-20 pb-6">
         <div className="flex flex-col justify-start items-start w-full top-20 p-8 rounded-md">
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1.5">
                 <h2 className="font-bold text-3xl tracking-wide">Witaj {session?.name}!</h2>
                 <span>Oto <span className="font-medium uppercase">twój</span> panel użytkownika. Tutaj możesz zmienić swoje dane, podejrzeć przesyłki oraz zobaczyć zamówienia z przeszłości.</span>
             </div>
