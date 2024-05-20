@@ -8,36 +8,26 @@ const passwordValidation = new RegExp(
 
 export const POST = async (req, res) => {
     try {
-        const data = await req.json()
+        // const data = await req.json()
 
-        const currentUserData = await prisma.user.findUnique({
-            where: {
-                email: data.currentEmail
-            },
-            select: {
-                password: true,
-                name: true,
-                surname: true,
-                email:true
-            }
-        })
+        const { values }= await req.json()
 
-        if (bcrypt.compareSync(data.values.password, currentUserData.password)){
-            if (data.values.newPassword !== ''){
-                if (data.values.password === data.values.newPassword){
+        if (values.path === "/panel/klienci"){
+            if (values.values.newPassword !== ''){
+                if (values.values.password === values.values.newPassword){
                     return NextResponse.json({status: false, message: "Hasła nie mogą być takie same!"})
                 }
                 else {
-                    if (passwordValidation.test(data.values.newPassword)){
+                    if (passwordValidation.test(values.values.newPassword)){
                         const res = await prisma.user.update({
                             where: {
-                                email: data.currentEmail
+                                email: values.currentEmail
                             },
                             data: {
-                                name: data.values.name,
-                                surname: data.values.surname,
-                                email: data.values.email,
-                                password: bcrypt.hashSync(data.values.newPassword, bcrypt.genSaltSync(10))
+                                name: values.values.name,
+                                surname: values.values.surname,
+                                email: values.values.email,
+                                password: bcrypt.hashSync(values.values.newPassword, bcrypt.genSaltSync(10))
                             }
                         })
         
@@ -53,12 +43,12 @@ export const POST = async (req, res) => {
             else {
                 const res = await prisma.user.update({
                     where: {
-                        email: data.currentEmail
+                        email: values.currentEmail
                     },
                     data: {
-                        name: data.values.name,
-                        surname: data.values.surname,
-                        email: data.values.email
+                        name: values.values.name,
+                        surname: values.values.surname,
+                        email: values.values.email
                     }
                 })
 
@@ -68,8 +58,69 @@ export const POST = async (req, res) => {
             }
         }
         else {
-            return NextResponse.json({status: false, message: "Nieprawidłowe hasło!"})
+            const currentUserData = await prisma.user.findUnique({
+                where: {
+                    email: values.currentEmail
+                },
+                select: {
+                    password: true,
+                    name: true,
+                    surname: true,
+                    email:true
+                }
+            })
+    
+            if (bcrypt.compareSync(values.values.password, currentUserData.password)){
+                if (values.values.newPassword !== ''){
+                    if (values.values.password === values.values.newPassword){
+                        return NextResponse.json({status: false, message: "Hasła nie mogą być takie same!"})
+                    }
+                    else {
+                        if (passwordValidation.test(values.values.newPassword)){
+                            const res = await prisma.user.update({
+                                where: {
+                                    email: values.currentEmail
+                                },
+                                data: {
+                                    name: values.values.name,
+                                    surname: values.values.surname,
+                                    email: values.values.email,
+                                    password: bcrypt.hashSync(values.values.newPassword, bcrypt.genSaltSync(10))
+                                }
+                            })
+            
+                            if (res){
+                                return NextResponse.json({status: true})
+                            }
+                        }
+                        else {
+                            return NextResponse.json({status: false, message: "Hasło powinno składać się z 8 znaków, w tym duza litera, znak specjalny oraz liczba."})
+                        }
+                    }
+                }
+                else {
+                    const res = await prisma.user.update({
+                        where: {
+                            email: values.currentEmail
+                        },
+                        data: {
+                            name: values.values.name,
+                            surname: values.values.surname,
+                            email: values.values.email
+                        }
+                    })
+    
+                    if (res){
+                        return NextResponse.json({status: true})
+                    }
+                }
+            }
+            else {
+                return NextResponse.json({status: false, message: "Nieprawidłowe hasło!"})
+            }
         }
+
+
     }
     catch (e) {
         return NextResponse.json({status: false})

@@ -8,17 +8,31 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from './input'
 import { Button } from './button'
 import { updateUserData } from '@/lib/connections/updateUserData'
-import { useRouter } from 'next/navigation'
-
-const formSchema = z.object({
-    name: z.string().min(1, {message: "Imię jest zbyt krótkie."}),
-    surname: z.string().min(1, {message: "Nazwisko jest zbyt krótkie."}),
-    password: z.string().min(1, {message: "Należy podać hasło, aby dokonać zmian."}),
-    newPassword: z.string().optional(),
-    email: z.string().min(4, {message: "Email jest zbyt krótki!"}).email("Nieprawidłowy email.")
-  })
+import { usePathname, useRouter } from 'next/navigation'
 
 function UpdateUserDataForm({data, logout}) {
+    const path = usePathname()
+
+    let formSchema
+
+    if (path === "/panel/klienci"){
+        formSchema = z.object({
+            name: z.string().min(1, {message: "Imię jest zbyt krótkie."}),
+            surname: z.string().min(1, {message: "Nazwisko jest zbyt krótkie."}),
+            newPassword: z.string().optional(),
+            email: z.string().min(4, {message: "Email jest zbyt krótki!"}).email("Nieprawidłowy email.")
+          })
+    }
+    else {
+        formSchema = z.object({
+            name: z.string().min(1, {message: "Imię jest zbyt krótkie."}),
+            surname: z.string().min(1, {message: "Nazwisko jest zbyt krótkie."}),
+            password: z.string().min(1, {message: "Należy podać hasło, aby dokonać zmian."}),
+            newPassword: z.string().optional(),
+            email: z.string().min(4, {message: "Email jest zbyt krótki!"}).email("Nieprawidłowy email.")
+          })
+    }
+
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState("‎")
@@ -36,11 +50,18 @@ function UpdateUserDataForm({data, logout}) {
 
     async function onSubmit(values){
         setLoading(true)
-        const res = await updateUserData({values, currentEmail: data.email})
+        const res = await updateUserData({values, currentEmail: data.email, path: path})
 
         if (res.status){
-            await logout()
-            router.push('/zaloguj')
+            if (path === "/panel/klienci"){
+                router.refresh()
+                setLoading(false)
+                setDisableEditing(prev => !prev)
+            }
+            else {
+                await logout()
+                router.push('/zaloguj')
+            }
         }
         else {
             setMessage(res?.message)
@@ -83,15 +104,24 @@ function UpdateUserDataForm({data, logout}) {
                     <FormMessage />
                 </FormItem>
             )} />
-            <FormField control={form.control} name="password" render={({field}) => (
-                <FormItem>
-                    <FormLabel>Hasło</FormLabel>
-                    <FormControl>
-                        <Input type="password" {...field} disabled={disableEditing} />
-                    </FormControl>
-                    <FormMessage />
-                </FormItem>
-            )} />
+            {
+                path === "/panel/klienci" ?
+                (
+                    null
+                )
+                :
+                (
+                    <FormField control={form.control} name="password" render={({field}) => (
+                        <FormItem>
+                            <FormLabel>Hasło</FormLabel>
+                            <FormControl>
+                                <Input type="password" {...field} disabled={disableEditing} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )} />
+                )
+            }
             <FormField control={form.control} name="newPassword" render={({field}) => (
                 <FormItem>
                     <FormLabel>Nowe hasło</FormLabel>

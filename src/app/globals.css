@@ -87,21 +87,21 @@
 }
 
 .container-dot::before {
-  animation: pulse var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.375)
+  animation: dot-pulse var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.375)
     infinite;
 }
 
 .dot {
-  animation: pulse var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.25)
+  animation: dot-pulse var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.25)
     infinite both;
 }
 
 .container-dot::after {
-  animation: pulse var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.125)
+  animation: dot-pulse var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.125)
     infinite;
 }
 
-@keyframes pulse {
+@keyframes dot-pulse {
   0%,
   100% {
     transform: scale(0);
@@ -109,6 +109,17 @@
 
   50% {
     transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
   }
 }
 

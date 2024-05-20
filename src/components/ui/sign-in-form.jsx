@@ -10,6 +10,7 @@ import { Input } from './input';
 import { Button } from './button';
 import { createUser } from '@/lib/connections/createUser';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const passwordValidation = new RegExp(
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
@@ -105,6 +106,9 @@ function SignInForm() {
                             <Input type="password" {...field} />
                         </FormControl>
                         <FormMessage />
+                        <div className='w-full text-right block text-sm'>
+                            Masz już konto? Kliknij <Link href={"./zaloguj"}><span className="text-blue-500">tutaj!</span></Link>
+                        </div>
                     </FormItem>
                 )} />
                 <div className='flex flex-col justify-center items-left gap-6'>

@@ -7,6 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  OUT_FOR_DELIVERY
+  DELIVERING
+  CANCELED
+  FINISHED
+}
+
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
@@ -14,11 +23,16 @@ model User {
   email String @unique
   password String
   admin Boolean
+
+  messages Message[]
+  cartItems CartItem[]
+  orders Order[]
 }
 
 model Product {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
+  brand String
   color String
   photos String[]
   Dimensions Float[]
@@ -26,5 +40,59 @@ model Product {
   price Float
   discount Boolean
   discountedPrice Float?
+  stock Int
+
+  cartItems CartItem[]
+  orders OrderProduct[]
+}
+
+model CartItem {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  productId String @db.ObjectId
+  product Product @relation(fields: [productId], references: [id])
   quantity Int
+}
+
+model Order {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  netAmount Float
+  address String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products OrderProduct[]
+  events OrderEventState[]
+}
+
+model OrderProduct {
+  id String @id @default(auto()) @map("_id") @db.ObjectId  
+  orderId String @db.ObjectId
+  order Order @relation(fields: [orderId], references: [id])
+  productId String @db.ObjectId
+  product Product @relation(fields: [productId], references: [id])
+  quantity Int
+}
+
+model OrderEventState {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  orderId String @db.ObjectId
+  order Order @relation(fields: [orderId], references: [id]) 
+  state OrderStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  body String
+  readed Boolean @default(false)
+  user User @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

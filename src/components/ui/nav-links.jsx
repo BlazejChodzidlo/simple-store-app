@@ -7,11 +7,12 @@ import NavProfileButton from './nav-profile-button'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { Button } from './button'
+import NotificationsButton from './notifications-button'
 
 
 const MotionLink = motion(Link)
 
-function NavLinks({name, admin, logout}) {
+function NavLinks({name, admin, logout, notifications}) {
   const pathname = usePathname()
 
   return (
@@ -57,7 +58,17 @@ function NavLinks({name, admin, logout}) {
           </MotionLink>
         </Button>
       </div>
-      <NavProfileButton name={name} logout={logout} admin={admin}/>
+      <div className='absolute top-2 right-4 flex'>
+      {
+        name ?
+        (
+          <NotificationsButton notifications={notifications}/>
+        )
+        :
+        null
+      }
+      <NavProfileButton name={name} logout={logout} admin={admin} />
+      </div>
     </div>
   )
 }

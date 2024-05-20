@@ -1,6 +1,7 @@
 import DashBoardNav from "@/components/ui/dashboard-nav";
 import { getSession } from "@/lib/session/getSession";
 import { Inter } from "next/font/google";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,7 @@ export default async function RootLayout({ children }) {
 
     const session = await getSession()
 
-    if (!session && !session.admin){
+    if (!session && !session?.admin){
         redirect('/')
     }
 

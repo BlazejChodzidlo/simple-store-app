@@ -27,6 +27,10 @@ const sidebarNavItems = [
     href: "/profil/wyglad"
   },
   {
+    title: "Wiadomości",
+    href: "/profil/wiadomosci"
+  },
+  {
     title: "Panel Sterowania",
     href: "/panel"
   },

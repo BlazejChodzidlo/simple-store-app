@@ -18,7 +18,7 @@ function SideNav({links, admin, logout}) {
         {
             links.map((item, index) => {
 
-                if (!admin && item.title === "Produkty"){
+                if (!admin && item.title === "Panel Sterowania"){
                     return
                 }
 

@@ -23,14 +23,14 @@ function NavProfileButton({name, admin, logout}) {
       }
 
   return (
-    <div className="absolute top-2 right-12">
+    <div>
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant='profile'>
                     <CircleUser /> {name ? name : 'Zaloguj się'}
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Konto</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {
@@ -60,10 +60,10 @@ function NavProfileButton({name, admin, logout}) {
                     :
                     <>
                         <DropdownMenuItem asChild>
-                            <Link href={'./zaloguj'}>Zaloguj</Link>
+                            <Link href={'/zaloguj'}>Zaloguj</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <Link href={'./zarejestruj'}>Utwórz konto</Link>
+                            <Link href={'/zarejestruj'}>Utwórz konto</Link>
                         </DropdownMenuItem>
                     </>
                 }
