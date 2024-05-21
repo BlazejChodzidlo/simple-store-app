@@ -1,11 +1,11 @@
 "use client"
-import { MoreHorizontal, ArrowUpDown } from "lucide-react"
+
+import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { DialogTrigger } from "./ui/dialog"
-import DialogDeleteUser from "./ui/dialog-user"
-import React, { useState } from "react"
+import React from "react"
 import { DataTableColumnHeader } from "./ui/data-table-column-header"
+import { DialogTrigger } from "./ui/dialog"
 
 export const columns = [
     {

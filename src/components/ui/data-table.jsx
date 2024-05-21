@@ -1,43 +1,50 @@
 "use client"
 
-import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
+import { flexRender, getCoreRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
 import { Table, TableBody, TableCell, TableHead, TableHeader,TableRow } from "@/components/ui/table"
-import { Button } from "./button"
 import { useState } from "react"
-import { Input } from "./input"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "./dropdown-menu"
-import { Settings2 } from "lucide-react"
 import TablePagination from "./table-pagination"
 import { motion } from "framer-motion"
 import DialogUser from "./dialog-user"
 import { Dialog } from "./dialog"
+import { usePathname } from "next/navigation"
+import DataTableToolbar from "./data-table-toolbar"
 
 const MotionRow = motion(TableRow)
 
 export function DataTable({columns, data, logout}) {
-    let rowDelay = 0.1
-
+  let rowDelay = 0.1
+  
+  const path = usePathname()
   const [columnData, setColumnData] = useState()
-  const [sorting, setSorting] = useState([])
-  const [columnFilters, setColumnFilters] = useState([])
+  const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState({})
+  const [columnFilters, setColumnFilters] = useState([])
+  const [sorting, setSorting] = useState([])
 
+
+  console.log(columnFilters)
 
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
     state: {
-        sorting,
-        columnFilters,
-        columnVisibility,
+      sorting,
+      columnVisibility,
+      rowSelection,
+      columnFilters,
     },
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     meta: {
         onDelete: (id) => {
             setColumnData(id)
@@ -50,28 +57,7 @@ export function DataTable({columns, data, logout}) {
 
   return (
     <Dialog>
-        <div className="flex items-center py-4">
-            <Input placeholder="Szukaj email'a..." value={(table.getColumn("email")?.getFilterValue()) ?? ""} onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)} className="max-w-sm" />
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="ml-auto">
-                        <Settings2 className="mr-2 h-4 w-4" />
-                        Wygląd
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    {
-                        table.getAllColumns().filter((column) => column.getCanHide()).map((column) => {
-                            return (
-                                <DropdownMenuCheckboxItem key={column.id} className="capitalize" checked={column.getIsVisible()} onCheckedChange={(value) => column.toggleVisibility(!!value)}>
-                                    {column.id}
-                                </DropdownMenuCheckboxItem>
-                            )
-                        })
-                    }
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </div>
+        <DataTableToolbar table={table} />
         <div className="rounded-md border">
             <Table>
                 <TableHeader>
@@ -121,7 +107,14 @@ export function DataTable({columns, data, logout}) {
             </Table>
         </div>
         <TablePagination table={table} />
-        <DialogUser data={columnData} logout={logout}/>
+        {
+            path === "/panel/klienci" ?
+             (
+                <DialogUser data={columnData} logout={logout}/>
+             )
+             :
+             null
+        }
     </Dialog>
   )
 }
