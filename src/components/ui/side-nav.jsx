@@ -18,12 +18,12 @@ function SideNav({links, admin, logout}) {
         {
             links.map((item, index) => {
 
-                if (!admin && item.title === "Panel Sterowania"){
+                if (!admin && item.title === "Dashboard"){
                     return
                 }
 
                 return (
-                    <Button key={index} variant="ghost" asChild className={`w-full ${pathname === item.href ? "bg-muted" : "bg-transparent"}`} onClick={item.title === "Wyloguj" ? handleLogout : ''}>
+                    <Button key={index} variant="ghost" asChild className={`w-full ${pathname === item.href ? "bg-muted" : "bg-transparent"}`} onClick={item.title === "Logout" ? handleLogout : ''}>
                         {
                             item.title === "Wyloguj" ? 
                             <span className='text-red-600 cursor-pointer hover:bg-destructive hover:text-white'>{item.title}</span>

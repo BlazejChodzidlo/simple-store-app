@@ -12,10 +12,10 @@ function RecentSales({recentSales, delay, numberOfMonthlySales}) {
         <MotionCard className="col-span-3" initial={{opacity: 0, transform: 'translateY(20px)'}} animate={{opacity: 1, transform: 'translateY(0px)'}} transition={{ease: 'easeOut', delay: delay, duration: 0.3}}>
             <CardHeader>
                 <CardTitle>
-                    Ostatnie sprzedaże
+                    Recent sales
                 </CardTitle>
                 <CardDescription>
-                    Udało się wykonać {numberOfMonthlySales} zamówień w tym miesiącu
+                    You made {numberOfMonthlySales} sales this month
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -31,7 +31,10 @@ function RecentSales({recentSales, delay, numberOfMonthlySales}) {
                                     <p className='text-sm font-medium leading-none'>{sale.user.name} {sale.user.surname}</p>
                                     <p className='text-sm text-muted-foreground'>{sale.user.email}</p>
                                 </div>
-                                <div className='ml-auto font-medium'>+{sale.netAmount} zł</div>
+                                <div className='ml-auto font-medium'>+{new Intl.NumberFormat('us-Us', {
+                                    style: 'currency',
+                                    currency: 'USD'
+                                }).format(sale.netAmount)}</div>
                             </div>
                         )
                     })

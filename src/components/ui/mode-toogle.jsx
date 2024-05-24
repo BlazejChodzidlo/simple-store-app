@@ -20,7 +20,7 @@ export function ModeToggle() {
 
   return (
     <DropdownMenuCheckboxItem checked={theme === "dark" ? true : false} onCheckedChange={handleThemeChange}>
-        Ciemny motyw
+        Dark mode
     </DropdownMenuCheckboxItem>
   )
 }

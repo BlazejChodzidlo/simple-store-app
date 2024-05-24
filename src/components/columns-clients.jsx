@@ -10,7 +10,7 @@ import { DialogTrigger } from "./ui/dialog"
 export const columns = [
     {
         accessorKey: "name",
-        header: () => <div className="text-left">Imię</div>,
+        header: () => <div className="text-left">Name</div>,
         cell: ({ row }) => {
           const name = row.getValue("name")
      
@@ -19,7 +19,7 @@ export const columns = [
     },
     {
         accessorKey: "surname",
-        header: () => <div className="text-left">Nazwisko</div>,
+        header: () => <div className="text-left">Surname</div>,
         cell: ({ row }) => {
           const surname = row.getValue("surname")
      
@@ -41,7 +41,7 @@ export const columns = [
     },
     {
         accessorKey: "count",
-        header: () => <div className="text-left">Zamówienia</div>,
+        header: () => <div className="text-left">Orders</div>,
         cell: ({ row }) => {
           const count = row.getValue("count")
      
@@ -52,14 +52,14 @@ export const columns = [
         accessorKey: "amount",
         header: ({ column }) => {
             return (
-              <DataTableColumnHeader column={column} title="Wartość" />
+              <DataTableColumnHeader column={column} title="Amount" />
             )
         },
         cell: ({ row }) => {
           const amount = row.getValue("amount")
-          const formmated = new Intl.NumberFormat('pl-PL', {
+          const formmated = new Intl.NumberFormat('us-US', {
             style: 'currency',
-            currency: 'PLN'
+            currency: 'USD'
           }).format(amount)
      
           return <div className="text-left font-medium">{formmated}</div>
@@ -81,17 +81,17 @@ export const columns = [
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Zarządzaj</DropdownMenuLabel>
                 <DropdownMenuItem className="w-full" onClick={() => navigator.clipboard.writeText(user.id)}>
-                    Kopiuj ID użytkownika
+                    Copy customer ID
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild disabled={user.admin}>
                   <DialogTrigger className="w-full" onClick={() => {table.options?.meta?.onDisplay(user)}}>
-                    Edytuj użytkownika
+                    Edit customer
                   </DialogTrigger>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-600" asChild disabled={user.admin}>
                   <DialogTrigger className="w-full" onClick={() => {table.options?.meta?.onDelete(user.id)}}>
-                    Usuń użytkownika
+                    Delete customer
                   </DialogTrigger>
                 </DropdownMenuItem>
               </DropdownMenuContent>

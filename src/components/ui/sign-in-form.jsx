@@ -50,7 +50,7 @@ function SignInForm() {
         if (res.status) {
             setMessage("‎")
             setLoading(false)
-            router.push('./zaloguj')
+            router.push('/login')
         }
         else {
             setMessage(res.message)
@@ -60,12 +60,12 @@ function SignInForm() {
 
   return (
     <motion.div initial={{opacity: 0, transform: 'translateY(20px)'}} animate={{opacity: 1, transform: 'translateY(0px)'}} transition={{ease: 'easeOut', delay: 0.1, duration: 0.3}} className='border rounded-md p-8 shadow w-[525px]'>
-        <h2 className='w-full text-center font-medium text-xl'>Utwórz nowe konto</h2>
+        <h2 className='w-full text-center font-medium text-xl'>Create new account</h2>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
                 <FormField control={form.control} name="name" render={({field}) => (
                     <FormItem>
-                        <FormLabel>Imię:</FormLabel>
+                        <FormLabel>Name</FormLabel>
                         <FormControl>
                             <Input placeholder="Jan" type="text" {...field} />
                         </FormControl>
@@ -74,7 +74,7 @@ function SignInForm() {
                 )} />
                 <FormField control={form.control} name="surname" render={({field}) => (
                     <FormItem>
-                        <FormLabel>Nazwisko:</FormLabel>
+                        <FormLabel>Surname</FormLabel>
                         <FormControl>
                             <Input placeholder="Kowalski" type="text" {...field} />
                         </FormControl>
@@ -83,16 +83,16 @@ function SignInForm() {
                 )} />
                 <FormField control={form.control} name="email" render={({field}) => (
                     <FormItem>
-                        <FormLabel>Email:</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
-                            <Input placeholder="przykladowy@email.com" type="email" {...field} />
+                            <Input placeholder="example@email.com" type="email" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )} />
                 <FormField control={form.control} name="password" render={({field}) => (
                     <FormItem>
-                        <FormLabel>Hasło:</FormLabel>
+                        <FormLabel>Password</FormLabel>
                         <FormControl>
                             <Input type="password" {...field} />
                         </FormControl>
@@ -101,13 +101,13 @@ function SignInForm() {
                 )} />
                 <FormField control={form.control} name="confirmPassword" render={({field}) => (
                     <FormItem>
-                        <FormLabel>Potwiedź hasło:</FormLabel>
+                        <FormLabel>Confirm password</FormLabel>
                         <FormControl>
                             <Input type="password" {...field} />
                         </FormControl>
                         <FormMessage />
                         <div className='w-full text-right block text-sm'>
-                            Masz już konto? Kliknij <Link href={"./zaloguj"}><span className="text-blue-500">tutaj!</span></Link>
+                            Do you have a account? Click <Link href={"./login"}><span className="text-blue-500">here!</span></Link>
                         </div>
                     </FormItem>
                 )} />
@@ -119,7 +119,7 @@ function SignInForm() {
                                 loading ?
                                 <div className="container-dot"><div className="dot" /></div>
                                 :
-                                'Zarejestruj'
+                                'Register'
                             }
                         </Button>
                     </div>

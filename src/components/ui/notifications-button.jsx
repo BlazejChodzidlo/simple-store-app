@@ -10,7 +10,7 @@ function NotificationsButton({notifications}) {
   return (
     <div>
         <Button variant="profile" asChild>
-            <Link href={'/profil/wiadomosci'} className="relative w-full h-full">
+            <Link href={'/profile/messages'} className="relative w-full h-full">
                     <Bell size={22}/>
                     {
                         notifications === 0 ?

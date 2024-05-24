@@ -13,7 +13,7 @@ export const POST = async (req, res) => {
         })
 
         if (emailExists){
-            return NextResponse.json({status: false, message: "Konto z podanym emailem juź istnieje."})
+            return NextResponse.json({status: false, message: "An account with the given email address already exists."})
         }
         else {
             const hashedPassword = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10))

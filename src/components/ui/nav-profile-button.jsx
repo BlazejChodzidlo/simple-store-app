@@ -27,48 +27,48 @@ function NavProfileButton({name, admin, logout}) {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant='profile'>
-                    <CircleUser /> {name ? name : 'Zaloguj się'}
+                    <CircleUser /> {name ? name : 'Log in'}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Konto</DropdownMenuLabel>
+                <DropdownMenuLabel>Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {
                     name ?
                     <>
                         <DropdownMenuItem asChild>
-                            <Link href={'/profil'}>Zarządzaj</Link>
+                            <Link href={'/profile'}>Manage</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <Link href={'/profil/przesylki'}>Przesylki</Link>
+                            <Link href={'/profile/delivery'}>Delivery</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <Link href={'/profil/zamowienia'}>Zamówienia</Link>
+                            <Link href={'/profile/orders'}>Orders</Link>
                         </DropdownMenuItem>
                         {
                             admin ? 
                             <DropdownMenuItem asChild>
-                                <Link href={'/panel'}>Panel Sterowania</Link>
+                                <Link href={'/dashboard/overview'}>Dashboard</Link>
                             </DropdownMenuItem>
                             :
                             ''
                         }
                         <DropdownMenuItem asChild>
-                            <span className='text-red-600 hover:bg-destructive hover:text-white' onClick={handleLogout}>Wyloguj</span>
+                            <span className='text-red-600 hover:bg-destructive hover:text-white' onClick={handleLogout}>Logout</span>
                         </DropdownMenuItem>
                     </>
                     :
                     <>
                         <DropdownMenuItem asChild>
-                            <Link href={'/zaloguj'}>Zaloguj</Link>
+                            <Link href={'/login'}>Log in</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <Link href={'/zarejestruj'}>Utwórz konto</Link>
+                            <Link href={'/register'}>Register</Link>
                         </DropdownMenuItem>
                     </>
                 }
                 <DropdownMenuSeparator />
-                <DropdownMenuLabel>Wygląd</DropdownMenuLabel>
+                <DropdownMenuLabel>Apperance</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <ModeToggle />
             </DropdownMenuContent>

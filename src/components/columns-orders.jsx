@@ -25,7 +25,7 @@ export const columns = [
         accessorKey: "address",
         header: () => {
             return (
-                <div className="text-left">Adres</div>
+                <div className="text-left">Address</div>
             )
         },
         cell: ({ row }) => {
@@ -38,7 +38,7 @@ export const columns = [
         accessorKey: "created",
         header: () => {
             return (
-                <div className="text-left">Data rozpoczęcia</div>
+                <div className="text-left">Begin date</div>
             )
         },
         cell: ({ row }) => {
@@ -59,7 +59,7 @@ export const columns = [
         accessorKey: "updated",
         header: () => {
             return (
-                <div className="text-left">Ostatnia aktualizacja</div>
+                <div className="text-left">Last update</div>
             )
         },
         cell: ({ row }) => {
@@ -86,8 +86,8 @@ export const columns = [
         cell: ({ row }) => {
             const value = new Date(row.original.netAmount)
 
-            const formatted = new Intl.NumberFormat("pl-PL", {
-                currency: "PLN",
+            const formatted = new Intl.NumberFormat("us-US", {
+                currency: "USD",
                 style: 'currency'
             }).format(value)
        
@@ -140,17 +140,17 @@ export const columns = [
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Zarządzaj</DropdownMenuLabel>
                 <DropdownMenuItem className="w-full" onClick={() => navigator.clipboard.writeText(user.id)}>
-                    Kopiuj ID zamówienia
+                    Copy order ID
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild disabled={user.admin}>
                   <DialogTrigger className="w-full" onClick={() => {table.options?.meta?.onDisplay(user)}}>
-                    Podgląd zamównienia
+                    Order preview
                   </DialogTrigger>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-600" asChild disabled={user.admin}>
                   <DialogTrigger className="w-full" onClick={() => {table.options?.meta?.onDelete(user.id)}}>
-                    Anuluj zamówienie
+                    Cancel order
                   </DialogTrigger>
                 </DropdownMenuItem>
               </DropdownMenuContent>

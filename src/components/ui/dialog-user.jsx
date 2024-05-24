@@ -16,14 +16,14 @@ function DialogUser({data, logout}) {
     if (res?.status){
       router.refresh()
       toast({
-        title: "Informacja o użytkowniku.",
-        description: "Pomyślnie usunięto wskazanego użytkownika!"
+        title: "User information.",
+        description: "Specified user successfully deleted!"
       })
     }
     else {
       toast({
-        title: "Coś poszło nie tak.",
-        description: "Jest jakiś problem z twoim poleceniem.",
+        title: "Something went wrong.",
+        description: "There is a problem with your command.",
         variant: "destructive"
       })
     }
@@ -35,15 +35,15 @@ function DialogUser({data, logout}) {
         typeof data === "object" ?
         (
           <DialogHeader>
-            <DialogTitle>Użytkownik {data?.id}</DialogTitle>
-            <DialogDescription>Informaja o tym użytkowniku. Możesz zobaczyć różne informacje, zmienić dane itp.</DialogDescription>
+            <DialogTitle>Customer {data?.id}</DialogTitle>
+            <DialogDescription>Information about this user. You can see various information, change data, etc.</DialogDescription>
           </DialogHeader>
         )
         : 
         (
           <DialogHeader>
-            <DialogTitle>Usuń użytkownika</DialogTitle>
-            <DialogDescription>Ta akcja nie może zostać cofnięta. Upewnij się, że chcesz to zrobić.</DialogDescription>
+            <DialogTitle>Delete customer</DialogTitle>
+            <DialogDescription>This action cannot be undone. Make sure you want to do this.</DialogDescription>
           </DialogHeader>
         )
       }
@@ -56,11 +56,11 @@ function DialogUser({data, logout}) {
           <div className='flex justify-end w-full space-x-2'>
             <DialogClose asChild>
               <Button variant="secondary">
-                Anuluj
+                Cancel
               </Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button variant="destructive" onClick={handleDelete}>Usuń</Button>
+              <Button variant="destructive" onClick={handleDelete}>Delete</Button>
             </DialogClose>
           </div>
         )

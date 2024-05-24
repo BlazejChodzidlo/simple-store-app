@@ -30,11 +30,11 @@ export const POST = async (req, res) => {
                 return NextResponse.json({status: true})
             }
             else {
-                return NextResponse.json({status: false, message: "Nieprawidłowe hasło."})
+                return NextResponse.json({status: false, message: "Incorrect password."})
             }
         }
         else {
-            return NextResponse.json({status: false, message: 'Nieprawidłowy email!'})
+            return NextResponse.json({status: false, message: 'Incorrect email!'})
         }
     }
     catch (e) {

@@ -15,7 +15,7 @@ export const POST = async (req, res) => {
         if (values.path === "/panel/klienci"){
             if (values.values.newPassword !== ''){
                 if (values.values.password === values.values.newPassword){
-                    return NextResponse.json({status: false, message: "Hasła nie mogą być takie same!"})
+                    return NextResponse.json({status: false, message: "Passwords cannot be the same!"})
                 }
                 else {
                     if (passwordValidation.test(values.values.newPassword)){
@@ -36,7 +36,7 @@ export const POST = async (req, res) => {
                         }
                     }
                     else {
-                        return NextResponse.json({status: false, message: "Hasło powinno składać się z 8 znaków, w tym duza litera, znak specjalny oraz liczba."})
+                        return NextResponse.json({status: false, message: "The password should consist of 8 characters, including a capital letter, a special character and a number."})
                     }
                 }
             }
@@ -73,7 +73,7 @@ export const POST = async (req, res) => {
             if (bcrypt.compareSync(values.values.password, currentUserData.password)){
                 if (values.values.newPassword !== ''){
                     if (values.values.password === values.values.newPassword){
-                        return NextResponse.json({status: false, message: "Hasła nie mogą być takie same!"})
+                        return NextResponse.json({status: false, message: "Passwords cannot be the same!"})
                     }
                     else {
                         if (passwordValidation.test(values.values.newPassword)){
@@ -94,7 +94,7 @@ export const POST = async (req, res) => {
                             }
                         }
                         else {
-                            return NextResponse.json({status: false, message: "Hasło powinno składać się z 8 znaków, w tym duza litera, znak specjalny oraz liczba."})
+                            return NextResponse.json({status: false, message: "The password should consist of 8 characters, including a capital letter, a special character and a number."})
                         }
                     }
                 }
@@ -116,7 +116,7 @@ export const POST = async (req, res) => {
                 }
             }
             else {
-                return NextResponse.json({status: false, message: "Nieprawidłowe hasło!"})
+                return NextResponse.json({status: false, message: "Incorrect password!"})
             }
         }
 

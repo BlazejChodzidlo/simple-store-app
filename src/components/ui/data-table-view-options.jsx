@@ -11,7 +11,7 @@ function DataTableViewOptions({table}) {
         <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
                 <Settings2 className="mr-2 h-4 w-4" />
-                Wygląd
+                View
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

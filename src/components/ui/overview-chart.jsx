@@ -12,10 +12,10 @@ function OverviewChart({delay, sales}) {
     <MotionCard className="col-span-5" initial={{opacity: 0, transform: 'translateY(20px)'}} animate={{opacity: 1, transform: 'translateY(0px)'}} transition={{ease: 'easeOut', delay: delay, duration: 0.3}}>
         <CardHeader>
             <CardTitle>
-                Miesięczne sprzedaże
+                Monthly sales
             </CardTitle>
             <CardDescription>
-                Wizualizacja sprzedaży w ciągu ostatnich miesięcy
+                Visualization of sales in recent months
             </CardDescription>
         </CardHeader>
         <CardContent>
@@ -34,7 +34,7 @@ function OverviewChart({delay, sales}) {
                 :
                 (
                     <div className='w-full h-[375px] flex flex-col items-center justify-center'>
-                        <span className='text-sm text-muted-foreground'>Brak danych</span>
+                        <span className='text-sm text-muted-foreground'>No data</span>
                     </div>
                 ) 
             }
