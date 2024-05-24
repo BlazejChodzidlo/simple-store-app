@@ -5,12 +5,10 @@ import { Toaster } from '@/components/ui/toaster'
 import { getAllOrders } from '@/lib/connections/getAllOrders'
 import React from 'react'
 
-// export const runtime = "edge"
+export const runtime = "edge"
 
 async function Orders() {
   const orders = await getAllOrders()
-
-  // console.log(orders)
 
   return (
     <div className='w-full flex flex-col'>

@@ -73,7 +73,7 @@ function LoginForm() {
                         </FormControl>
                         <FormMessage />
                         <div className='w-full text-right block text-sm'>
-                            You don't have a account? Click <Link href={"./register"}><span className="text-blue-500">here!</span></Link>
+                            You do not have a account? Click <Link href={"/register"}><span className="text-blue-500">here!</span></Link>
                         </div>
                     </FormItem>
                 )}/>
